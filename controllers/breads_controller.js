@@ -8,7 +8,7 @@ breads.get('/:arrayIndex', (req, res) => {
 
 
 breads.get(`/`, (req, res) => {
-    res.send(Bread)
+    res.render(`index`,{breads:Bread})
 })
 
 
