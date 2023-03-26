@@ -4,12 +4,18 @@ let Bread = require(`../models/bread.js`)
 breads.get('/:arrayIndex', (req, res) => {
     res.render("show",{bread:Bread[req.params.arrayIndex]})
 })
-breads.delete('/:id', (req, res) => {
-  Bread.findByIdAndDelete(req.params.id) 
-    .then(deletedBread => { 
-      res.status(303).redirect('/breads')
+// SHOW
+breads.get('/:id', (req, res) => {
+  Bread.findById(req.params.id)
+      .then(foundBread => {
+        const bakedBy = foundBread.getBakedBy() 
+        console.log(bakedBy)
+        res.render('show', {
+            bread: foundBread
+        })
+      })
     })
-})
+
 
 breads.get('/:id/edit', (req, res) => {
   Bread.findById(req.params.id) 
